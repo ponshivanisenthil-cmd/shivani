@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shivani 💖 Valentine</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      max-width: 420px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+    button {
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+    }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      animation: pulse 1.2s infinite;
+    }
+    #no {
+      background: #ddd;
+      position: absolute;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,77,109,0.6); }
+      70% { box-shadow: 0 0 0 20px rgba(255,77,109,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,77,109,0); }
+    }
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="boom" src="https://assets.mixkit.co/sfx/preview/mixkit-firework-explosion-1703.mp3"></audio>
+<audio id="pop" src="https://assets.mixkit.co/sfx/preview/mixkit-game-ball-tap-2073.mp3"></audio>
+
+<div class="card">
+  <h1>Hey Shivani 💕</h1>
+  <p>
+    Roses are red 🌹<br>
+    Violets are blue 💙<br>
+    I made this page…<br>
+    Just for you 😌
+  </p>
+  <h2>Will you be my Valentine? 💘</h2>
+  <button id="yes" onclick="yesClicked()">YES 😍</button>
+  <button id="no" onmouseover="moveNo()">No 🙄</button>
+</div>
+
+<script>
+  const boom = document.getElementById("boom");
+  const pop = document.getElementById("pop");
+
+  function moveNo() {
+    const no = document.getElementById("no");
+    pop.play();
+    no.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    no.style.top = Math.random() * (window.innerHeight - 120) + "px";
+  }
+
+  function fireworks() {
+    const emojis = ["🎆","🎇","💥","✨","🎉","🥳"];
+    for (let i = 0; i < 100; i++) {
+      const e = document.createElement("div");
+      e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      e.style.position = "fixed";
+      e.style.left = Math.random() * 100 + "vw";
+      e.style.top = Math.random() * 100 + "vh";
+      e.style.fontSize = (20 + Math.random() * 30) + "px";
+      document.body.appendChild(e);
+      setTimeout(() => e.remove(), 2000);
+    }
+  }
+
+  function yesClicked() {
+    boom.play();
+    fireworks();
+    document.body.innerHTML = `
+      <div class="card">
+        <h1>YAYYY 🎉💖</h1>
+        <p>
+          Best decision ever 😌<br><br>
+          You are officially my Valentine 💕
+        </p>
+        <h2>Happy Valentine’s Day 💘</h2>
+      </div>
+    `;
+  }
+
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+  }, 300);
+</script>
+
+</body>
+</html>
